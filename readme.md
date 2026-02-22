@@ -8,6 +8,7 @@
 ## How to get set up
 
 To start all containers run `docker compose up -d`
+To stop all containers run `docker compose down`
 
 ## Check it's working:
 
@@ -21,18 +22,35 @@ To start all containers run `docker compose up -d`
 Check running topics with:
 
 ```
-docker exec -it checkout-kafka-1 opt/kafka/bin/kafka-topics.sh \
+docker exec -it checkout-kafka opt/kafka/bin/kafka-topics.sh \
 --list \
 --bootstrap-server kafka:9092
 ```
 
-Note: there should be a topic at start up called 'events' when running the docker set up locally,
+Note: there should be a topic at start up called 'visit_events' when running the docker set up locally,
 as this will be autocreated by our test consumer.
+
+- Write a test event to the topic: 
+
+```
+docker exec -it checkout-kafka opt/kafka/bin/kafka-console-producer.sh \
+--topic visit_events \
+--bootstrap-server kafka:9092
+```
+
+- Check events are being written to the topic: 
+
+```
+docker exec -it checkout-kafka opt/kafka/bin/kafka-console-consumer.sh \
+--topic visit_events \
+--from-beginning \
+--bootstrap-server kafka:9092
+```
 
 - Create a topic with (although this is done automatically): 
 
 ```
-docker exec -it checkout-kafka-1 opt/kafka/bin/kafka-topics.sh \
+docker exec -it checkout-kafka opt/kafka/bin/kafka-topics.sh \
 --create \
 --topic events \
 --partitions 3 \
