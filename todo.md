@@ -13,7 +13,7 @@
 ## code
 - [x] create a test producer (1.15 events per second to mimic 100k events per day)
     - add code for random postcode and website
-- [ ] create a consumer to write raw events (use basic container)
+- [x] create a consumer to write raw events (use basic container)
     - straight forward writes
 - [ ] create a consumer to aggregate events and write aggregates (use flink) ++
 
