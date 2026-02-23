@@ -10,7 +10,7 @@
 To start all containers run `docker compose up -d`
 To stop all containers run `docker compose down`
 
-## Check it's working:
+## Check it's working (integration style tests):
 
 ### localstack
 
@@ -56,4 +56,11 @@ docker exec -it checkout-kafka opt/kafka/bin/kafka-topics.sh \
 --partitions 3 \
 --replication-factor 1 \
 --bootstrap-server kafka:9092
+```
+
+## Run unit tests
+
+From the root folder:
+```
+python -m pytest tests/test_producer.py -v 
 ```
