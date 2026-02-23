@@ -33,3 +33,9 @@ services:
     build: ./app/producer
     depends_on:
       - kafka
+
+  consumer:
+    build: ./app/consumer_raw
+    depends_on:
+      - kafka
+      - localstack
