@@ -15,12 +15,33 @@ To stop all containers run `docker compose down`
 ### localstack
 
 - Run `curl localhost:4566/_localstack/health` to see if localstack is health and running
-- Run `aws --endpoint-url=http://localhost:4566 s3 ls` to check our buckets
+- Run `aws --endpoint-url=http://localhost:4566 s3 ls` to check our buckets for raw and aggregate data
 
 Check if data is being written raw to our buckets:
 
 ```
 aws --endpoint-url=http://localhost:4566 s3 ls s3://raw-events
+```
+
+Check if data is being written to our aggregate buckets (after 60 seconds there should be data):
+
+```
+aws --endpoint-url=http://localhost:4566 s3 ls s3://aggregated-events --recursive
+```
+
+Read a particular aggregate file:
+
+```
+aws --endpoint-url=http://localhost:4566 s3 cp s3://aggregated-events/<path-to-file>
+aws --endpoint-url=http://localhost:4566 s3 cp s3://aggregated-events/postcode=ZW9F0WD/window=2026-02-26T21-19-00.json -
+```
+
+### flink
+
+Check logs with:
+
+```
+docker logs flink-aggregator
 ```
 
 ### kafka
