@@ -14,7 +14,7 @@ To stop all containers run `docker compose down`
 
 ### localstack
 
-- Run `curl localhost:4566/_localstack/health` to see if localstack is health and running
+- Run `curl localhost:4566/_localstack/health` to see if localstack is healthy and running
 - Run `aws --endpoint-url=http://localhost:4566 s3 ls` to check our buckets for raw and aggregate data
 
 Check if data is being written raw to our buckets:
